@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Boston Bars Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet map styles -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      padding: 10px;
+      margin: 0;
+      background: #222;
+      color: white;
+      text-align: center;
+    }
+
+    #map {
+      height: calc(100vh - 100px);
+      width: 100%;
+    }
+
+    .submit-button {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: #2e7d32;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      width: 220px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Boston Bars Map 🍺</h1>
+
+<a
+  class="submit-button"
+  href="https://docs.google.com/forms/d/e/1FAIpQLSc6m4eteJmiHHoxauHK9yfAOq2bZ_mzX0BwXG6BZ19laxB41w/viewform"
+  target="_blank"
+>
+  Don't see a bar? Use this submission link.
+</a>
+
+<div id="map"></div>
+
+<!-- Leaflet map script -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  // Create the map centered on Boston
+  const map = L.map('map').setView([42.3601, -71.0589], 12);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // ADD BARS BELOW THIS LINE
+  L.marker([42.34366595317321, -71.06532361188238])
+    .addTo(map)
+    .bindPopup("<b>J.J. Foley's Cafe</b><br>South End<br>NOTE");
+</script>
+
+</body>
+</html>
