@@ -77,7 +77,11 @@
   }).addTo(map);
 
   // ADD BARS BELOW THIS LINE
-  L.marker([42.34366595317321, -71.06532361188238])
+  L.circleMarker([42.34366595317321, -71.06532361188238], {
+  radius: 6,
+  color: '#111',
+  fillColor: '#f4b400',
+  fillOpacity: 0.9})
     .addTo(map)
     .bindPopup("<b>J.J. Foley's</b><br><a href=\"https://maps.app.goo.gl/quVU3cSdAybVxLo19\" target=\"_blank\">117 E Berkeley St, Boston, MA 02118</a><br>South End<br>-Best pint of Guinness in America");
 
