@@ -32,9 +32,14 @@
     
 
     #searchResults {
+      position: absolute;   /* float above layout */
+      top: 100%;            /* directly below the input */
+      left: 0;
+      right: 0;
+      z-index: 1000;        /* appear above map */
       background: white;
       border-radius: 8px;
-      margin-top: 4px;
+      margin-top: 4px;      /* small spacing from input */
       box-shadow: 0 4px 12px #eee;
       max-height: 250px;
       overflow-y: auto;
