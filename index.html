@@ -26,40 +26,10 @@
     }
 
     #map {
-      height: calc(100vh - 140px);
+      height: calc(100vh - 120px);
       width: 100%;
-    }
-
-    .submit-button {
-      display: block;
-      margin: 10px auto;
-      padding: 12px 20px;
-      font-size: 16px;
-      background: #BD3039;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      text-align: center;
-      width: 225px;
     }
     
-    .search-box {
-      position: absolute;
-      top: 120px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      width: 85%;
-      max-width: 400px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
 
     #searchResults {
       background: white;
@@ -94,6 +64,7 @@
       background: #222;
     }
 
+
     .search-container {
       position: relative;
       flex: 1;
@@ -112,6 +83,10 @@
       white-space: nowrap;
       padding: 12px 16px;
       font-size: 14px;
+      background: #BD3039;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
     }
 
     @media (max-width: 600px) {
@@ -125,12 +100,18 @@
     }
     }
 
-
+    .header {
+      background: #222;
+    }
 
   </style>
 </head>
 
 <body>
+
+  <header class="header">
+    <h1>Boston Bars Map 🍺</h1>
+  
 
   <div class="top-bar">
     <div class="search-container">
@@ -143,6 +124,8 @@
       <div id="searchResults"></div>
     </div>
   
+  </header>
+
     <a
       class="submit-button"
       href="https://docs.google.com/forms/d/e/1FAIpQLSc6m4eteJmiHHoxauHK9yfAOq2bZ_mzX0BwXG6BZ19laxB41w/viewform"
@@ -152,16 +135,6 @@
     </a>
   </div>
   
-
-<div class="search-box">
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search for a bar..."
-    autocomplete="off"
-  />
-  <div id="searchResults"></div>
-</div>
 
 <div id="map"></div>
 
