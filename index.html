@@ -42,6 +42,25 @@
       text-align: center;
       width: 225px;
     }
+    
+    .search-box {
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      width: 85%;
+      max-width: 400px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
   </style>
 </head>
 
@@ -62,12 +81,23 @@
    ✚ Suggest a bar/edit
 </a>
 
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search for a bar..."
+  />
+</div>
+
 <div id="map"></div>
 
 <!-- Leaflet map script -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
+
+  const bars = [];
+
   // Create the map centered on Boston
   const map = L.map('map').setView([42.347, -71.063], 13);
 
@@ -77,7 +107,7 @@
   }).addTo(map);
 
   // ADD BARS BELOW THIS LINE
-  L.circleMarker([42.34366595317321, -71.06532361188238], {
+  const jjFoleys = L.circleMarker([42.34366595317321, -71.06532361188238], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -85,7 +115,7 @@
     .addTo(map)
     .bindPopup("<b>J.J. Foley's Cafe</b><br><a href=\"https://maps.app.goo.gl/quVU3cSdAybVxLo19\" target=\"_blank\">117 E Berkeley St, Boston, MA 02118</a><br>South End");
 
-  L.circleMarker([42.33514384225899, -71.04601309377051], {
+  const hunters = L.circleMarker([42.33514384225899, -71.04601309377051], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -93,7 +123,7 @@
     .addTo(map)
     .bindPopup("<b>Hunter's</b><br><a href=\"https://maps.app.goo.gl/tMWnxsbmexCMwGim6\" target=\"_blank\">110 Dorchester St, Boston, MA 02127</a><br>South Boston");
 
-  L.circleMarker([42.33314672750118, -71.0274018519264], {
+  const local149 = L.circleMarker([42.33314672750118, -71.0274018519264], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -101,7 +131,7 @@
     .addTo(map)
     .bindPopup("<b>Local 149</b><br><a href=\"https://maps.app.goo.gl/ss8CkXsZSJEgkGnJ9\" target=\"_blank\">149 P St, South Boston, MA 02127</a><br>South Boston");  
 
-  L.circleMarker([42.33164823616139, -71.03544675522114], {
+  const lStreetTavern = L.circleMarker([42.33164823616139, -71.03544675522114], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -109,7 +139,7 @@
     .addTo(map)
     .bindPopup("<b>L Street Tavern</b><br><a href=\"https://maps.app.goo.gl/nWzWZub2Zcc3864L9\" target=\"_blank\">658 E 8th St, Boston, MA 02127</a><br>South Boston");  
 
-  L.circleMarker([42.33127327773518, -71.04122702938854], {
+  const shamrockPub = L.circleMarker([42.33127327773518, -71.04122702938854], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1181,7 +1211,7 @@
     .addTo(map)
     .bindPopup("<b>Shore Leave</b><br><a href=\"https://maps.app.goo.gl/wqJAAK5pCThD4RK2A\" target=\"_blank\">11 William E Mullins Way, Boston, MA 02118</a><br>South End");
 
-    L.circleMarker([42.37415656666338, -71.06312678703047], {
+  L.circleMarker([42.37415656666338, -71.06312678703047], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1189,7 +1219,7 @@
     .addTo(map)
     .bindPopup("<b>Warren Tavern</b><br><a href=\"https://maps.app.goo.gl/AZb84f7zUZHrKeiL8\" target=\"_blank\">2 Pleasant St, Charlestown, MA 02129</a><br>Charlestown");
 
-    L.circleMarker([42.3738786354158, -71.06277056909708], {
+  L.circleMarker([42.3738786354158, -71.06277056909708], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1197,7 +1227,7 @@
     .addTo(map)
     .bindPopup("<b>Sullivan's Public House</b><br><a href=\"https://maps.app.goo.gl/edt3BjMARyGYYt8P6\" target=\"_blank\">85 Main St, Boston, MA 02129</a><br>Charlestown");
 
-    L.circleMarker([42.36461264002745, -71.0613995298876], {
+  L.circleMarker([42.36461264002745, -71.0613995298876], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1205,7 +1235,7 @@
     .addTo(map)
     .bindPopup("<b>The Greatest Bar</b><br><a href=\"https://maps.app.goo.gl/iWZiy48rgKdHqyP86\" target=\"_blank\">262 Friend St, Boston, MA 02114</a><br>West End");
 
-    L.circleMarker([42.36584631556, -71.06130308225006], {
+  L.circleMarker([42.36584631556, -71.06130308225006], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1213,7 +1243,7 @@
     .addTo(map)
     .bindPopup("<b>Big Night Live</b><br><a href=\"https://maps.app.goo.gl/AgcPiix85wqFkJ5y8\" target=\"_blank\">110 Causeway St, Boston, MA 02114</a><br>West End");
 
-    L.circleMarker([42.356640978456895, -71.05251264027468], {
+  L.circleMarker([42.356640978456895, -71.05251264027468], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1221,7 +1251,7 @@
     .addTo(map)
     .bindPopup("<b>Howl at the Moon</b><br><a href=\"https://maps.app.goo.gl/sxkguCpcUx4o11Ms9\" target=\"_blank\">184 High St, Boston, MA 02110</a><br>Downtown");
 
-    L.circleMarker([42.35833707601755, -71.05333359938288], {
+  L.circleMarker([42.35833707601755, -71.05333359938288], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -1229,13 +1259,29 @@
     .addTo(map)
     .bindPopup("<b>Coogan's</b><br><a href=\"https://maps.app.goo.gl/SoUBTov5Q8Y43CwS8\" target=\"_blank\">171 Milk St, Boston, MA 02109</a><br>Downtown");
 
-    L.circleMarker([42.364881120512976, -71.04134696014444], {
+  L.circleMarker([42.364881120512976, -71.04134696014444], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
   fillOpacity: 0.95})
     .addTo(map)
     .bindPopup("<bThe Tall Ship Boston</b><br><a href=\"https://maps.app.goo.gl/jxaihbygPK79BwPX6\" target=\"_blank\">1 E Pier Dr, Boston, MA 02128</a><br>East Boston");
+
+
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+
+    if (!query) return;
+
+    const match = bars.find(bar =>
+      bar.name.toLowerCase().includes(query)
+    );
+
+    if (match) {
+      map.setView(match.marker.getLatLng(), 16);
+      match.marker.openPopup();
+    }
+  });
 
 
 </script>
