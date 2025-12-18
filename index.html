@@ -64,10 +64,9 @@
       background: #222;
     }
 
-
     .search-container {
       position: relative;
-      flex: 1;
+      flex: 1; /* makes search bar take remaining space */
     }
 
     .search-container input {
@@ -79,7 +78,6 @@
     }
 
     .submit-button {
-      margin: 0;
       white-space: nowrap;
       padding: 12px 16px;
       font-size: 14px;
@@ -87,18 +85,24 @@
       color: white;
       text-decoration: none;
       border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .submit-button:hover {
+      background: #a22832;
     }
 
     @media (max-width: 600px) {
-    .top-bar {
-      flex-direction: column;
+      .top-bar {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .submit-button {
+        width: 100%;
+        text-align: center;
+      }
     }
 
-    .submit-button {
-      width: 100%;
-      text-align: center;
-    }
-    }
 
     .header {
       background: #222;
@@ -113,27 +117,27 @@
     <h1>Boston Bars Map 🍺</h1>
   
 
-  <div class="top-bar">
-    <div class="search-container">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search bars..."
-        autocomplete="off"
-      />
-      <div id="searchResults"></div>
+    <div class="top-bar">
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search bars..."
+          autocomplete="off"
+        />
+        <div id="searchResults"></div>
+      </div>
+      
+      <a
+        class="submit-button"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSc6m4eteJmiHHoxauHK9yfAOq2bZ_mzX0BwXG6BZ19laxB41w/viewform"
+        target="_blank"
+      >
+        Suggest a bar
+      </a>
     </div>
-  
-  </header>
-
-    <a
-      class="submit-button"
-      href="https://docs.google.com/forms/d/e/1FAIpQLSc6m4eteJmiHHoxauHK9yfAOq2bZ_mzX0BwXG6BZ19laxB41w/viewform"
-      target="_blank"
-    >
-      Suggest a bar
-    </a>
-  </div>
+    </header>
+    
   
 
 <div id="map"></div>
