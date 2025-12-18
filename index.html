@@ -2043,19 +2043,27 @@
   marker: theTallShipBoston
   });
 
+
+  
   const searchInput = document.getElementById('searchInput');
-  const searchResults = document.getElementById('searchResults');
+const searchResults = document.getElementById('searchResults');
 
-  searchInput.addEventListener('input', function () {
-    const query = this.value.toLowerCase();
-    searchResults.innerHTML = '';
+searchInput.addEventListener('input', function () {
+  const query = this.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
 
-    if (!query) return;
+  if (!query) return;
 
-    const matches = bars.filter(bar =>
-      bar.name.toLowerCase().includes(query)
-    );
+  const matches = bars.filter(bar =>
+    bar.name.toLowerCase().includes(query)
+  );
 
+  if (matches.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'search-result';
+    div.textContent = 'No results found';
+    searchResults.appendChild(div);
+  } else {
     matches.forEach(bar => {
       const div = document.createElement('div');
       div.className = 'search-result';
@@ -2070,7 +2078,14 @@
 
       searchResults.appendChild(div);
     });
-  });
+  }
+});
+
+// Clear search results when Enter is pressed
+searchInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') searchResults.innerHTML = '';
+});
+
 
 
 
