@@ -45,6 +45,21 @@
       overflow-y: auto;
     }
 
+    #clearSearch {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: #999;
+      display: none;       /* hidden by default */
+      user-select: none;
+    }
+
+    #clearSearch:hover {
+      color: #333;
+    }
 
     .search-result {
       padding: 12px;
@@ -124,6 +139,8 @@
   
 
     <div class="top-bar">
+
+
       <div class="search-container">
         <input
           type="text"
@@ -131,6 +148,7 @@
           placeholder="Search..."
           autocomplete="off"
         />
+        <span id="clearSearch">&times;</span>
         <div id="searchResults"></div>
       </div>
       
@@ -2051,41 +2069,55 @@
 
 
 
-const searchInput = document.getElementById('searchInput');
-const searchResults = document.getElementById('searchResults');
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+  const clearSearch = document.getElementById('clearSearch');
 
-searchInput.addEventListener('input', function () {
-  const query = this.value.toLowerCase().trim();
-  searchResults.innerHTML = '';
+  searchInput.addEventListener('input', function () {
+    const query = this.value.toLowerCase().trim();
+    searchResults.innerHTML = '';
 
-  if (!query) return;
+    // Show or hide the X button
+    clearSearch.style.display = query ? 'block' : 'none';
 
-  const matches = bars.filter(bar =>
-    bar.name.toLowerCase().includes(query)
-  );
+    if (!query) return;
 
-  if (matches.length === 0) {
-    const div = document.createElement('div');
-    div.className = 'search-result';
-    div.textContent = 'No results found';
-    searchResults.appendChild(div);
-  } else {
-    matches.forEach(bar => {
+    const matches = bars.filter(bar =>
+      bar.name.toLowerCase().includes(query)
+    );
+
+    if (matches.length === 0) {
       const div = document.createElement('div');
       div.className = 'search-result';
-      div.textContent = bar.name;
-
-      div.addEventListener('click', function () {
-        map.setView(bar.marker.getLatLng(), 16);
-        bar.marker.openPopup();
-        searchResults.innerHTML = '';
-        searchInput.value = bar.name;
-      });
-
+      div.textContent = 'No results found';
       searchResults.appendChild(div);
-    });
+    } else {
+      matches.forEach(bar => {
+        const div = document.createElement('div');
+        div.className = 'search-result';
+        div.textContent = bar.name;
+
+        div.addEventListener('click', function () {
+          map.setView(bar.marker.getLatLng(), 16);
+          bar.marker.openPopup();
+          searchResults.innerHTML = '';
+          searchInput.value = bar.name;
+          clearSearch.style.display = 'block';
+        });
+
+        searchResults.appendChild(div);
+      });
   }
-});
+  });
+
+  // Clear search when X is clicked
+  clearSearch.addEventListener('click', function() {
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+    this.style.display = 'none';
+    searchInput.focus();
+  });
+
 
 // Clear search results when Enter is pressed
 searchInput.addEventListener('keydown', function(e) {
