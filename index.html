@@ -154,6 +154,11 @@
     .addTo(map)
     .bindPopup("<b>Hunter's</b><br><a href=\"https://maps.app.goo.gl/tMWnxsbmexCMwGim6\" target=\"_blank\">110 Dorchester St, Boston, MA 02127</a><br>South Boston");
 
+  bars.push({
+  name: "Hunter's",
+  marker: hunters
+  });
+
   const local149 = L.circleMarker([42.33314672750118, -71.0274018519264], {
   radius: 6,
   color: '#111',
@@ -161,6 +166,11 @@
   fillOpacity: 0.95})
     .addTo(map)
     .bindPopup("<b>Local 149</b><br><a href=\"https://maps.app.goo.gl/ss8CkXsZSJEgkGnJ9\" target=\"_blank\">149 P St, South Boston, MA 02127</a><br>South Boston");  
+
+  bars.push({
+  name: "Local 149",
+  marker: local149
+  });
 
   const lStreetTavern = L.circleMarker([42.33164823616139, -71.03544675522114], {
   radius: 6,
@@ -170,6 +180,11 @@
     .addTo(map)
     .bindPopup("<b>L Street Tavern</b><br><a href=\"https://maps.app.goo.gl/nWzWZub2Zcc3864L9\" target=\"_blank\">658 E 8th St, Boston, MA 02127</a><br>South Boston");  
 
+  bars.push({
+  name: "L Street Tavern",
+  marker: lStreetTavern
+  });
+
   const shamrockPub = L.circleMarker([42.33127327773518, -71.04122702938854], {
   radius: 6,
   color: '#111',
@@ -178,7 +193,12 @@
     .addTo(map)
     .bindPopup("<b>Shamrock Pub</b><br><a href=\"https://maps.app.goo.gl/UENrd3GuPspEjG9G7\" target=\"_blank\">501 E 8th St, Boston, MA 02127</a><br>South Boston");
 
-  L.circleMarker([42.33110053420481, -71.04635381374727], {
+  bars.push({
+  name: "Shamrock Pub",
+  marker: shamrockPub
+  });
+
+  const seapoint = L.circleMarker([42.33110053420481, -71.04635381374727], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -186,7 +206,12 @@
     .addTo(map)
     .bindPopup("<b>Seapoint</b><br><a href=\"https://maps.app.goo.gl/ptXgRY1kqRhzCzfV9\" target=\"_blank\">367 E 8th St, Boston, MA 02127</a><br>South Boston");
 
-  L.circleMarker([42.337810742907635, -71.05653856626053], {
+  bars.push({
+  name: "Seapoint",
+  marker: seapoint
+  });
+
+  const castleIslandBrewingSouthBostonL.circleMarker([42.337810742907635, -71.05653856626053], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
@@ -194,13 +219,23 @@
     .addTo(map)
     .bindPopup("<b>Castle Island Brewing - South Boston</b><br><a href=\"https://maps.app.goo.gl/JQ3LnbXS4meaRa6L6\" target=\"_blank\">10 Old Colony Ave, Boston, MA 02127</a><br>South Boston"); 
 
-  L.circleMarker([42.34047123536345, -71.05298876106107], {
+  bars.push({
+  name: "Castle Island Brewing - South Boston",
+  marker: castleIslandBrewingSouthBostonL
+  });
+
+  const barVolpe = L.circleMarker([42.34047123536345, -71.05298876106107], {
   radius: 6,
   color: '#111',
   fillColor: '#f4b400',
   fillOpacity: 0.95})
     .addTo(map)
     .bindPopup("<b>Bar Volpe</b><br><a href=\"https://maps.app.goo.gl/j2U4tizekkyi422U7\" target=\"_blank\">170 W Broadway, Boston, MA 02127</a><br>South Boston"); 
+
+  bars.push({
+  name: "Bar Volpe",
+  marker: barVolpe
+  });
 
   L.circleMarker([42.34009015110249, -71.0523817556454], {
   radius: 6,
