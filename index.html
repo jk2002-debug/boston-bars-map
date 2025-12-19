@@ -173,6 +173,21 @@
 
   const bars = [];
 
+
+  const defaultBarStyle = {
+    radius: 6,
+    color: '#111',
+    fillColor: '#f4b400',
+    fillOpacity: 0.95
+  };
+
+  const activeBarStyle = {
+    radius: 7,
+    color: '#111',
+    fillColor: '#BD3039'
+  };
+
+
   // Create the map centered on Boston
   const map = L.map('map').setView([42.347, -71.063], 13);
 
@@ -182,18 +197,9 @@
   }).addTo(map);
 
   // ADD BARS BELOW THIS LINE
-  const jjFoleys = L.circleMarker([42.34366595317321, -71.06532361188238], {
-  radius: 6,
-  color: '#111',
-  fillColor: '#f4b400',
-  fillOpacity: 0.95})
+  const jjFoleys = L.circleMarker([42.34366595317321, -71.06532361188238], defaultBarStyle)
     .addTo(map)
     .bindPopup("<b>J.J. Foley's Cafe</b><br><a href=\"https://maps.app.goo.gl/quVU3cSdAybVxLo19\" target=\"_blank\">117 E Berkeley St, Boston, MA 02118</a><br>South End");
-
-  jjFoleys.on('click', function () {
-    this.setStyle({ radius: 8 });
-    setTimeout(() => this.setStyle({ radius: 6 }), 180);
-  });
 
   bars.push({
   name: "J.J. Foley's Cafe",
@@ -2071,6 +2077,19 @@
   name: "The Tall Ship Boston",
   marker: theTallShipBoston
   });
+
+
+
+
+  function setActiveBar(selectedMarker) {
+    bars.forEach(bar => {
+      bar.marker.setStyle(defaultBarStyle);
+    });
+
+    selectedMarker.setStyle(activeBarStyle);
+  }
+
+
 
 
 
