@@ -190,6 +190,11 @@
     .addTo(map)
     .bindPopup("<b>J.J. Foley's Cafe</b><br><a href=\"https://maps.app.goo.gl/quVU3cSdAybVxLo19\" target=\"_blank\">117 E Berkeley St, Boston, MA 02118</a><br>South End");
 
+  jjFoleys.on('click', function () {
+    this.setStyle({ radius: 8 });
+    setTimeout(() => this.setStyle({ radius: 6 }), 180);
+  });
+
   bars.push({
   name: "J.J. Foley's Cafe",
   marker: jjFoleys
@@ -2082,9 +2087,9 @@
 
     if (!query) return;
 
-    const matches = bars.filter(bar =>
-      bar.name.toLowerCase().includes(query)
-    );
+    const matches = bars
+      .filter(bar => bar.name.toLowerCase().includes(query))
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     if (matches.length === 0) {
       const div = document.createElement('div');
