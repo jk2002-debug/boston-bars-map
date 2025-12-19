@@ -2083,18 +2083,30 @@
 
         // If marker already exists, update it
         if (userMarker) {
-          userMarker.setLatLng([lat, lng]);
-          accuracyCircle.setLatLng([lat, lng]);
-          accuracyCircle.setRadius(accuracy);
+           userMarker.setLatLng([lat, lng]);
+           userMarker.ring.setLatLng([lat, lng]);
+           accuracyCircle.setLatLng([lat, lng]);
+           accuracyCircle.setRadius(accuracy);
         } else {
-          // Blue dot (center)
-          userMarker = L.circleMarker([lat, lng], {
-            radius: 7,
-            color: "#1e90ff",
-            fillColor: "#1e90ff",
-            fillOpacity: 1,
-            weight: 2
-          }).addTo(map);
+          // White ring (outer)
+          const userRing = L.circleMarker([lat, lng], {
+          radius: 8,
+          color: "#ffffff",
+          fillOpacity: 0,
+          weight: 2
+       }).addTo(map);
+
+        // Blue center dot (inner)
+         userMarker = L.circleMarker([lat, lng], {
+           radius: 6,
+           color: "#1e90ff",
+           fillColor: "#1e90ff",
+           fillOpacity: 1,
+           weight: 0
+         }).addTo(map);
+
+// Keep ring synced with marker
+userMarker.ring = userRing;
 
           // Accuracy circle (soft blue glow)
           accuracyCircle = L.circle([lat, lng], {
