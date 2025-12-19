@@ -2069,6 +2069,58 @@
   });
 
 
+  // ---------- USER LIVE LOCATION (Google Maps–style blue dot) ----------
+
+  let userMarker = null;
+  let accuracyCircle = null;
+
+  if ("geolocation" in navigator) {
+    navigator.geolocation.watchPosition(
+      function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        // If marker already exists, update it
+        if (userMarker) {
+          userMarker.setLatLng([lat, lng]);
+          accuracyCircle.setLatLng([lat, lng]);
+          accuracyCircle.setRadius(accuracy);
+        } else {
+          // Blue dot (center)
+          userMarker = L.circleMarker([lat, lng], {
+            radius: 7,
+            color: "#1e90ff",
+            fillColor: "#1e90ff",
+            fillOpacity: 1,
+            weight: 2
+          }).addTo(map);
+
+          // Accuracy circle (soft blue glow)
+          accuracyCircle = L.circle([lat, lng], {
+            radius: accuracy,
+            color: "#1e90ff",
+            fillColor: "#1e90ff",
+            fillOpacity: 0.15,
+            weight: 0
+          }).addTo(map);
+
+          // Optional: center map on user once
+          map.setView([lat, lng], 15);
+        }
+      },
+      function (error) {
+        console.log("Location access denied or unavailable.");
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 10000,
+        timeout: 10000
+      }
+    );
+  }
+
+
 
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
